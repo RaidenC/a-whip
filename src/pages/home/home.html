@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <!--FAB-->
+  <ion-fab right bottom>
+    <button ion-fab mini color="light"><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button color="primary" ion-fab>
+        <ion-icon name="beaker"></ion-icon>
+      </button>
+      <button color="danger" ion-fab (click)="addFood()">
+        <ion-icon name="restaurant"></ion-icon>
+      </button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button color="secondary" ion-fab>
+        <ion-icon name="walk"></ion-icon>
+      </button>
+      <button color="dark" ion-fab (click)="addMeasurement()">
+        <ion-icon name="speedometer"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!--Summaries-->
+  <ion-card (click)="goToDiary()">
+    <ion-card-header>Calories Summary</ion-card-header>
+    <ion-card-content>Goal - Food + Exercise = Remaining</ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>Marcos Summary</ion-card-header>
+    <ion-card-content>
+      Marcos Chart... Marcos Data...
+    </ion-card-content>
+  </ion-card>
+</ion-content>
