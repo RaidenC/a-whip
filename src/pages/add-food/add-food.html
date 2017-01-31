@@ -6,7 +6,48 @@
 
 </ion-header>
 
+<ion-content>
+  <!--FAB-->
+  <ion-fab right bottom>
+    <button ion-fab mini color="light"><ion-icon name="apps"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button color="danger" ion-fab>
+        <ion-icon name="pin"></ion-icon>
+      </button>
+    </ion-fab-list>
+    <ion-fab-list side="left">
+      <button color="dark" ion-fab (click)="scan()">
+        <ion-icon name="barcode"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
-<ion-content padding>
+  <ion-searchbar
+    (ionInput)="onInput($event)"
+  >
+  </ion-searchbar>
 
+  <ion-toolbar no-border>
+    <ion-segment color="dark" [(ngModel)]="segment">
+      <ion-segment-button value="recent">RECENT</ion-segment-button>
+      <ion-segment-button value="custom">CUSTOM</ion-segment-button>
+      <ion-segment-button value="recipes">RECIPES</ion-segment-button>
+      <ion-segment-button value="meals">MEALS</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'recent'">
+      <ion-item *ngFor="let r of recentFood">{{r}}</ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'custom'">
+      <ion-item *ngFor="let c of customFood">{{c}}</ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'recipes'">
+      <ion-item *ngFor="let recipe of recipes">{{recipe}}</ion-item>
+    </ion-list>
+    <ion-list *ngSwitchCase="'meals'">
+      <ion-item *ngFor="let m of meals">{{m}}</ion-item>
+    </ion-list>
+  </div>
 </ion-content>
