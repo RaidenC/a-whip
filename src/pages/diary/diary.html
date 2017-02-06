@@ -7,15 +7,14 @@
     <ion-title>Diary</ion-title>
   </ion-navbar>
 
+  <div style="padding-left: 16px;">
+    <h3>Calories Summary</h3>
+    <p>Goal - Food + Exercise = Remaining</p>
+  </div>
+
 </ion-header>
 
-
 <ion-content>
-  <ion-card>
-    <ion-card-header>Calories Summary</ion-card-header>
-    <ion-card-content>Goal - Food + Exercise = Remaining</ion-card-content>
-  </ion-card>
-
   <ion-card *ngFor="let m of meals">
     <ion-list>
       <ion-row>
