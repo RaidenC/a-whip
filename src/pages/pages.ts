@@ -1,3 +1,4 @@
+export * from './sign-in/sign-in';
 export * from './home/home';
 export * from './diary/diary';
 export * from './add-food/add-food';
