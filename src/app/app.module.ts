@@ -13,7 +13,7 @@ import {
   NutritionPage, MacrosPage, NutrientsPage, CaloriesPage
 } from '../pages/pages';
 
-import { AuthService, DataService } from '../providers/providers';
+import { AuthService, NdbService } from '../providers/providers';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAKhMFfdFytQH-uOJc9cbGKKEAkvC6UFcc',
@@ -55,7 +55,7 @@ export const firebaseConfig = {
   ],
   providers: [
     AuthService,
-    DataService,
+    NdbService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
