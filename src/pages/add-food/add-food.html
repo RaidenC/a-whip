@@ -32,15 +32,18 @@
     <ion-list *ngSwitchCase="'recent'">
       <ion-item *ngFor="let r of recentFood" >
         <ion-item-sliding (ionDrag)="ondrag($event, r.ndbno)" >
-          <ion-item class="search-result">{{r.name}}</ion-item>
+          <ion-item details>
+            <summary>{{r.title}}</summary>
+            <p>{{r.keywords}}</p>
+          </ion-item>
           <ion-item-options side="right">
-            <button ion-button color="dark">
+            <button ion-button color="dark" (click)="addFood(r.ndbno)">
               <ion-icon name="add"></ion-icon>
             </button></ion-item-options>
           <ion-item-options side="left">
-            <button ion-button color="secondary"><ion-icon name="american-football"></ion-icon>{{currentFoodSummary.nutrients[1].value}}</button>
-            <button ion-button color="danger"><ion-icon name="ice-cream"></ion-icon>{{currentFoodSummary.nutrients[2].value}}</button>
-            <button ion-button color="primary"><ion-icon name="nutrition"></ion-icon>{{currentFoodSummary.nutrients[3].value}}</button>
+            <button ion-button color="secondary"><ion-icon name="american-football"></ion-icon>{{currentFoodSummary.nutrients[1].gm | number:'2.2-2'}}</button>
+            <button ion-button color="danger"><ion-icon name="ice-cream"></ion-icon>{{currentFoodSummary.nutrients[2].gm | number:'2.2-2'}}</button>
+            <button ion-button color="primary"><ion-icon name="nutrition"></ion-icon>{{currentFoodSummary.nutrients[3].gm | number:'2.2-2'}}</button>
           </ion-item-options>          
         </ion-item-sliding>
       </ion-item>

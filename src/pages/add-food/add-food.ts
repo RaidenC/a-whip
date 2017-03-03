@@ -14,7 +14,7 @@ export class AddFoodPage {
 
   meal: any;
   segment: any;
-  recentFood: Array<string>;
+  recentFood: Array<any>;
   customFood: Array<string>;
   recipes: Array<string>;
   meals: Array<string>;
@@ -34,7 +34,7 @@ export class AddFoodPage {
     this.meals = [];
     this.currentFoodSummary = this.ndbService.emptyFoodSummary();
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddFoodPage');
   }
@@ -60,12 +60,25 @@ export class AddFoodPage {
     this.currentFoodSummary = this.ndbService.emptyFoodSummary();
   }
 
-  searchFood(q: any) {
+  addFood(id:any){
+
+  }
+
+  searchFood(q: string) {
     this.ndbService.searchFood(q)
       .subscribe(
       value => {
         if (value.list.item) {
-          this.recentFood = value.list.item
+          // this.recentFood = value.list.item
+          value.list.item.forEach(food => {
+            let title:string = "";
+            let keywords:Array<string> = [];
+            keywords = food.name.split(",");
+            keywords.pop();
+            title = keywords.find(word => {return word.toUpperCase().includes(q.toUpperCase())});
+            keywords.splice(keywords.indexOf(title),1);
+            this.recentFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+          });
         }
       },
       e => console.log(e),
@@ -76,7 +89,14 @@ export class AddFoodPage {
   getNutrientSummary(q: any) {
     this.ndbService.getNutrientSummary(q).subscribe(
       value => {
-        this.currentFoodSummary = value.report.foods[0];
+        // this.currentFoodSummary = value.report.foods[0];
+        this.currentFoodSummary.nutrients = [];
+        value.report.foods[0].nutrients.forEach(nutrient => {
+          if(nutrient.gm === "--"){
+            nutrient.gm = 0;
+          }
+          this.currentFoodSummary.nutrients.push(nutrient);
+        });
       },
       e => console.log(e),
       () => console.log("complete")
