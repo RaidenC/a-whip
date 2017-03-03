@@ -12,7 +12,7 @@ export class NdbService {
 
   searchFood(q: any) {
     let baseUrl = "https://api.nal.usda.gov/ndb/search/?format=json&api_key=MO2tCSDwNo33vvL90mSk8OrRxq6J1OxzsW5QrfMG";
-    let sort = "n";
+    let sort = "r";
     let offset = 0;
     let max = 25
     let url = baseUrl + `&q=${q}&sort=${sort}&max=${max}&offset=${offset}`
@@ -40,28 +40,28 @@ export class NdbService {
           "nutrient": "Energy",
           "unit": "kcal",
           "value": null,
-          "gm": null
+          "gm": 0
         },
         {
           "nutrient_id": "269",
           "nutrient": "Sugars, total",
           "unit": "g",
           "value": null,
-          "gm": null
+          "gm": 0
         },
         {
           "nutrient_id": "204",
           "nutrient": "Total lipid (fat)",
           "unit": "g",
           "value": null,
-          "gm": null
+          "gm": 0
         },
         {
           "nutrient_id": "205",
           "nutrient": "Carbohydrate, by difference",
           "unit": "g",
           "value": null,
-          "gm": null
+          "gm": 0
         }
       ]
     };
