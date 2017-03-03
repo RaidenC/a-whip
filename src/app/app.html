@@ -8,14 +8,14 @@
   <ion-content>
     <ion-list no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}"></ion-icon> <span style="padding-left: 10px;">{{p.title}}</span>
+        <ion-icon name="{{p.icon}}"></ion-icon> &nbsp; <span>{{p.title}}</span>
       </button>
     </ion-list>
   </ion-content>
 
   <ion-footer>
     <button menuClose ion-item (click)="logOut()" color="light">
-      <ion-icon name="exit"></ion-icon> <span style="padding-left: 10px;">Log out</span>
+      <ion-icon name="exit"></ion-icon> &nbsp; <span>Log out</span>
     </button>
   </ion-footer>
 </ion-menu>
