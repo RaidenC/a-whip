@@ -15,9 +15,9 @@ export class AddFoodPage {
   meal: any;
   segment: any;
   recentFood: Array<any>;
-  customFood: Array<string>;
-  recipes: Array<string>;
-  meals: Array<string>;
+  customFood: Array<any>;
+  recipes: Array<any>;
+  meals: Array<any>;
   query: string;
   currentFoodSummary: any;
 
@@ -65,7 +65,7 @@ export class AddFoodPage {
 
   }
 
-  searchFood(q: string) {
+  searchFood(q: string, segment: string) {
     this.ndbService.searchFood(q)
       .subscribe(
       value => {
@@ -78,7 +78,20 @@ export class AddFoodPage {
             keywords.pop();
             title = keywords.find(word => {return word.toUpperCase().includes(q.toUpperCase())});
             keywords.splice(keywords.indexOf(title),1);
-            this.recentFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+            switch (segment) {
+              case 'recent':
+                this.recentFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+                break;
+              case 'custom':
+                this.customFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+                break;
+              case 'recipes':
+                this.recipes.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+                break;
+              case 'meals':
+                this.meals.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
+                break;
+            }
           });
         }
       },
