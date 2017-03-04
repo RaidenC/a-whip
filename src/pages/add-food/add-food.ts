@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { BarcodeScanner } from 'ionic-native';
 
 import { NdbService } from '../../providers/providers';
@@ -24,6 +24,7 @@ export class AddFoodPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private _toastCtrl: ToastController,
     public ndbService: NdbService
   ) {
     this.meal = this.navParams.data;
@@ -39,13 +40,11 @@ export class AddFoodPage {
     console.log('ionViewDidLoad AddFoodPage');
   }
 
-  ondrag(e: any, ndbno: any) {
-    if (e._state & 64) {
+  getSummary(ndbno: any) {
       console.log(this.currentFoodSummary.ndbno);
       if(ndbno!==this.currentFoodSummary.ndbno){
        this.getNutrientSummary(ndbno);
       }
-    }
   }
 
   scan() {
@@ -92,15 +91,25 @@ export class AddFoodPage {
     this.ndbService.getNutrientSummary(q).subscribe(
       value => {
         this.currentFoodSummary = value.report.foods[0];
-        value.report.foods[0].nutrients.forEach(nutrient => {
-          if(nutrient.gm === "--"){
-            nutrient.gm = 0;
-          }
-          this.currentFoodSummary.nutrients.push(nutrient);
-        });
       },
       e => console.log(e),
-      () => console.log("complete")
+      () => {
+        let protein = this.currentFoodSummary.nutrients[1].gm;
+        let lipid = this.currentFoodSummary.nutrients[2].gm;
+        let carbohydrate = this.currentFoodSummary.nutrients[3].gm;
+
+        let toast = this._toastCtrl.create({
+          message:`
+            Protein: ${protein}
+            Fat: ${lipid}
+            Carbs: ${carbohydrate}
+            `,
+          duration: 3000,
+          position: 'top'
+        });
+
+        toast.present();
+      }
     );
   }
 }
