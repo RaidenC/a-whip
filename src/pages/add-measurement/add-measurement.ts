@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { AngularFire, AngularFireAuth, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, AngularFireAuth, FirebaseListObservable } from 'angularfire2';
 
 @Component({
   selector: 'page-add-measurement',
@@ -10,8 +11,10 @@ import { AngularFire, AngularFireAuth, FirebaseObjectObservable } from 'angularf
 export class AddMeasurementPage {
 
   measurementDate: string;
-  measurements: Array<{title:string, value:number, unit:string}>;
-  measurement: FirebaseObjectObservable<any>;
+  measurementTypes: Array<string>;
+  measurements: any;
+  measurementData: FirebaseListObservable<any>;
+
 
   constructor(
     public navCtrl: NavController,
@@ -19,19 +22,25 @@ export class AddMeasurementPage {
     public af: AngularFire,
     private _auth: AngularFireAuth
   ) {
-    this.measurement = af.database.object('/' + this._auth.getAuth().uid  + '/measurement');
     this.measurementDate = new Date().toISOString();
-    this.measurements = [
-      {title: 'Weight', value: 0, unit: 'Lbs'},
-      {title: 'Chest', value: 0, unit: 'Inches'},
-      {title: 'Waist', value: 0, unit: 'Inches'},
-      {title: 'Bicep', value: 0, unit: 'Inches'},
-      {title: 'Forearm', value:0, unit: 'Inches'}
-    ];
+    this.measurementTypes = ['Weight', 'Chest', 'Waist', 'Bicep', 'Forearm'];
+    this.measurements = {};
+    this.measurementTypes.forEach(type => {
+      this.measurements[type] = null;
+    });
+
+    this.measurementData = af.database.list('/measurements/' + this._auth.getAuth().uid);
+
   }
 
-  saveMeasurement():void {
-    this.measurement.set(this.measurements[0]);
+  saveMeasurement(): void {
+    let data = {};
+    data['Date'] = this.measurementDate;
+    this.measurementTypes.forEach(type => {
+      data[type] = this.measurements[type]; 
+    });
+    this.measurementData.push(data);
+
     this.navCtrl.pop();
   }
 
