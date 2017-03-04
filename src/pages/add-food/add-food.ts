@@ -40,9 +40,11 @@ export class AddFoodPage {
   }
 
   ondrag(e: any, ndbno: any) {
-    let percent = e.getSlidingPercent();
-    if (this.currentFoodSummary.ndbno !== ndbno && percent < 0) {
-      this.getNutrientSummary(ndbno);
+    if (e._state & 64) {
+      console.log(this.currentFoodSummary.ndbno);
+      if(ndbno!==this.currentFoodSummary.ndbno){
+       this.getNutrientSummary(ndbno);
+      }
     }
   }
 
@@ -89,8 +91,7 @@ export class AddFoodPage {
   getNutrientSummary(q: any) {
     this.ndbService.getNutrientSummary(q).subscribe(
       value => {
-        // this.currentFoodSummary = value.report.foods[0];
-        this.currentFoodSummary.nutrients = [];
+        this.currentFoodSummary = value.report.foods[0];
         value.report.foods[0].nutrients.forEach(nutrient => {
           if(nutrient.gm === "--"){
             nutrient.gm = 0;
