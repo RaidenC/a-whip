@@ -65,7 +65,7 @@ export class AddFoodPage {
 
   }
 
-  searchFood(q: string, segment: string) {
+  searchFood(q: string) {
     this.ndbService.searchFood(q)
       .subscribe(
       value => {
@@ -78,20 +78,7 @@ export class AddFoodPage {
             keywords.pop();
             title = keywords.find(word => {return word.toUpperCase().includes(q.toUpperCase())});
             keywords.splice(keywords.indexOf(title),1);
-            switch (segment) {
-              case 'recent':
-                this.recentFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
-                break;
-              case 'custom':
-                this.customFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
-                break;
-              case 'recipes':
-                this.recipes.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
-                break;
-              case 'meals':
-                this.meals.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
-                break;
-            }
+            this.recentFood.push({"title":title, "keywords":keywords, "ndbno":food.ndbno});
           });
         }
       },

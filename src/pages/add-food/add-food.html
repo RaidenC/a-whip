@@ -43,7 +43,7 @@
         </ion-item-sliding>
       </ion-item>
       <ion-item *ngIf="recentFood.length == 0">
-        <button ion-button (click)="searchFood(query, segment)">Search in the USDA database</button>
+        <button ion-button (click)="searchFood(query)">Search in the USDA database</button>
       </ion-item>
     </ion-list>
     <ion-list *ngSwitchCase="'custom'">
