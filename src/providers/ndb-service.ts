@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs'
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 
 @Injectable()
@@ -17,7 +19,8 @@ export class NdbService {
     let max = 25
     let url = baseUrl + `&q=${q}&sort=${sort}&max=${max}&offset=${offset}`
     return this.http.get(url)
-      .map((resp: Response) => resp.json());
+      .map((resp: Response) => resp.json())
+      .catch(this._handleError);
   }
 
   getNutrientSummary(q: any) {
@@ -25,7 +28,8 @@ export class NdbService {
       + "&nutrients=205&nutrients=208&nutrients=203&nutrients=204&nutrients=205"; //Calories, protein, lipid, Carbohydrate
     let url = baseUrl + `&ndbno=${q}`;
     return this.http.get(url)
-      .map((resp: Response) => resp.json());
+      .map((resp: Response) => resp.json())
+      .catch(this._handleError);
   }
 
   emptyFoodSummary() {
@@ -65,5 +69,9 @@ export class NdbService {
         }
       ]
     };
+  }
+
+  private _handleError(error: Response){
+    return Observable.throw(error.statusText);
   }
 }
