@@ -8,7 +8,8 @@ import { MyApp } from './app.component';
 import {
   SignInPage,
   HomePage,
-  DiaryPage, AddFoodPage,
+  DiaryPage,
+  AddFoodPage,RecentFoodList,
   AddMeasurementPage,
   NutritionPage, MacrosPage, NutrientsPage, CaloriesPage
 } from '../pages/pages';
@@ -30,6 +31,7 @@ export const firebaseConfig = {
     HomePage,
     DiaryPage,
     AddFoodPage,
+    RecentFoodList,
     AddMeasurementPage,
     NutritionPage,
     MacrosPage,
@@ -47,6 +49,7 @@ export const firebaseConfig = {
     HomePage,
     DiaryPage,
     AddFoodPage,
+    RecentFoodList,
     AddMeasurementPage,
     NutritionPage,
     MacrosPage,

@@ -18,9 +18,9 @@
       </button>
     </ion-fab-list>
   </ion-fab>
-  <ion-searchbar (ionInput)="onInput($event)">
+  <ion-searchbar class="food-search-bar" (ionInput)="onInput($event)">
   </ion-searchbar>
-  <ion-toolbar no-border>
+  <ion-toolbar class="food-tabs" no-border>
     <ion-segment color="dark" [(ngModel)]="segment">
       <ion-segment-button value="recent">RECENT</ion-segment-button>
       <ion-segment-button value="custom">CUSTOM</ion-segment-button>
@@ -28,23 +28,13 @@
       <ion-segment-button value="meals">MEALS</ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-  <div [ngSwitch]="segment">
+  <div class="food-list-container" [ngSwitch]="segment">
     <ion-list *ngSwitchCase="'recent'">
-      <ion-item *ngFor="let r of recentFood" >
-        <ion-item-sliding>
-          <ion-item details>
-            <summary>{{r.title}}</summary>
-            <p>{{r.keywords}}</p>
-          </ion-item>
-          <ion-item-options side="right">
-            <button ion-button color="light" (click)="getSummary(r.ndbno)"><ion-icon name="options"></ion-icon></button>
-            <button ion-button color="dark" (click)="addFood(r.ndbno)"><ion-icon name="add"></ion-icon></button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-item>
-      <ion-item *ngIf="recentFood.length == 0">
-        <button ion-button (click)="searchFood(query)">Search in the USDA database</button>
-      </ion-item>
+      <recent-food-list
+        [recentFood]="recentFood"
+        [currentFoodSummary]="currentFoodSummary"
+        [query]="query">
+      </recent-food-list>
     </ion-list>
     <ion-list *ngSwitchCase="'custom'">
       <ion-item *ngFor="let c of customFood">{{c}}</ion-item>
