@@ -9,7 +9,7 @@ import {
   SignInPage,
   HomePage,
   DiaryPage,
-  AddFoodPage,RecentFoodList,
+  AddFoodPage,SearchFood,
   AddMeasurementPage,
   NutritionPage, MacrosPage, NutrientsPage, CaloriesPage
 } from '../pages/pages';
@@ -31,7 +31,7 @@ export const firebaseConfig = {
     HomePage,
     DiaryPage,
     AddFoodPage,
-    RecentFoodList,
+    SearchFood,
     AddMeasurementPage,
     NutritionPage,
     MacrosPage,
@@ -49,7 +49,7 @@ export const firebaseConfig = {
     HomePage,
     DiaryPage,
     AddFoodPage,
-    RecentFoodList,
+    SearchFood,
     AddMeasurementPage,
     NutritionPage,
     MacrosPage,

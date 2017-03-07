@@ -3,18 +3,22 @@ import { ToastController } from 'ionic-angular';
 import { NdbService } from '../../providers/providers';
 
 @Component({
-  selector: 'recent-food-list',
-  templateUrl: 'recent-food-list.html',
+  selector: 'search-food',
+  templateUrl: 'search-food.html',
 })
-export class RecentFoodList {
-  @Input() recentFood: Array<any>
-  @Input() currentFoodSummary: any;
+export class SearchFood {
   @Input() query: string;
+
+  searchResult: Array<any>
+  currentFoodSummary: any;
 
   constructor(
     public ndbService: NdbService,
     private _toastCtrl: ToastController
-  ) {}
+  ) {
+    this.searchResult = [];
+    this.currentFoodSummary = this.ndbService.emptyFoodSummary();
+  }
 
   searchFood(q: string) {
     this.ndbService.searchFood(q)
@@ -28,9 +32,9 @@ export class RecentFoodList {
             keywords.pop();
             title = keywords.find(word => { return word.toUpperCase().includes(q.toUpperCase()) });
             keywords.splice(keywords.indexOf(title), 1);
-            this.recentFood.push({ "title": title, "keywords": keywords, "ndbno": food.ndbno });
+            this.searchResult.push({ "title": title, "keywords": keywords, "ndbno": food.ndbno });
           });
-        }else{
+        } else {
           let toast = this._toastCtrl.create({
             message: 'No record found',
             position: 'bottom',
