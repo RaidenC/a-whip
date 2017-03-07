@@ -18,10 +18,4 @@ describe('SearchFood', () => {
       mockNdbService.searchFood.and.returnValue(Observable.of(false))
     });
   })
-  describe('getNutrientSummary', () => {
-    it('should update currentFoodSummary', () => {
-
-    });
-  })
-
 });
