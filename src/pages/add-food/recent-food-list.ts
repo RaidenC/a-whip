@@ -17,7 +17,6 @@ export class RecentFoodList {
   ) {}
 
   searchFood(q: string) {
-    console.log(q);
     this.ndbService.searchFood(q)
       .subscribe(
       value => {
