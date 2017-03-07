@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { BarcodeScanner } from 'ionic-native';
 
-import { NdbService } from '../../providers/providers';
-
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -19,12 +17,10 @@ export class AddFoodPage {
   recipes: Array<any>;
   meals: Array<any>;
   recentFood: Array<any>
-  currentFoodSummary: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    public ndbService: NdbService
+    public navParams: NavParams
   ) {
     this.meal = this.navParams.data;
     this.segment = 'recent';
@@ -32,7 +28,6 @@ export class AddFoodPage {
     this.customFood = [];
     this.recipes = [];
     this.meals = [];
-    this.currentFoodSummary = this.ndbService.emptyFoodSummary();
   }
 
   scan() {
@@ -46,7 +41,6 @@ export class AddFoodPage {
   onInput(ev: any) {
     this.query = ev.target.value;
     this.recentFood = [];
-    this.currentFoodSummary = this.ndbService.emptyFoodSummary();
   }
 
   addFood(id: any) {

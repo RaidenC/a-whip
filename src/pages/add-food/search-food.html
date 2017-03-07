@@ -1,6 +1,6 @@
-<ion-item class="food-list-item" *ngFor="let r of recentFood" >
+<ion-item class="search-food" *ngFor="let r of searchResult" >
   <ion-item-sliding>
-    <ion-item class="food-list-item-detail">
+    <ion-item class="search-food-detail">
       <h3>{{r?.title}}</h3>
       <p>{{r?.keywords}}</p>
     </ion-item>
@@ -13,6 +13,6 @@
   </ion-item-sliding>
 </ion-item>
 
-<ion-item *ngIf="recentFood.length == 0">
+<ion-item *ngIf="searchResult.length == 0">
   <button ion-button (click)="searchFood(query)">Search in the USDA database</button>
 </ion-item>
