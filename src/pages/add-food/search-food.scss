@@ -1,38 +1,8 @@
-.protein {
-  position:absolute;
-  top: 1px;
-}
-.lipid {
-  position:absolute;
-  top: 37px;
-}
-.carbohydrate {
-  position:absolute;
-  top: 73px;
-}
-
-.toast-container{
-  height: 35px
-}
-.protein > div > div > div{
-  text-align: center;
-  background-color: #32db64!important;
-}
-.lipid > div > div > div{
-  text-align: center;
-  background-color: #f53d3d!important;
-}
-.carbohydrate > div > div > div{
-  text-align: center;
-  background-color: #387ef5 !important;
-}
-
 .search-food > .item-inner > .input-wrapper> ion-label{
   margin-top: 0px;
 }
 
 .search-food-detail > .item-inner > .input-wrapper> ion-label {
-
   > h3 {
     text-transform: uppercase;
     font-size: small;

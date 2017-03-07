@@ -8,16 +8,13 @@ import { NdbService } from '../../providers/providers';
 })
 export class SearchFood {
   @Input() query: string;
-
   searchResult: Array<any>
-  currentFoodSummary: any;
 
   constructor(
     public ndbService: NdbService,
     private _toastCtrl: ToastController
   ) {
     this.searchResult = [];
-    this.currentFoodSummary = this.ndbService.emptyFoodSummary();
   }
 
   searchFood(q: string) {
@@ -46,45 +43,5 @@ export class SearchFood {
       e => console.log(e),
       () => console.log("complete")
       );
-  }
-
-  getNutrientSummary(q: any) {
-    this.ndbService.getNutrientSummary(q).subscribe(
-      value => {
-        this.currentFoodSummary = value.report.foods[0];
-      },
-      e => console.log(e),
-      () => {
-        let protein = this.currentFoodSummary.nutrients[1].gm;
-        let lipid = this.currentFoodSummary.nutrients[2].gm;
-        let carbohydrate = this.currentFoodSummary.nutrients[3].gm;
-
-        let pToast = this._toastCtrl.create({
-          message: `${protein}/100g --------- Protein`,
-          position: 'top',
-          cssClass: 'protein',
-          duration: 3000
-        });
-
-
-        let lToast = this._toastCtrl.create({
-          message: `${lipid}/100g ---------- Fat (lipid)`,
-          position: 'top',
-          cssClass: 'lipid',
-          duration: 3000
-        });
-
-
-        let cToast = this._toastCtrl.create({
-          message: `${carbohydrate}/100g ---------- Carbohydrate `,
-          position: 'top',
-          cssClass: 'carbohydrate',
-          duration: 3000
-        });
-        pToast.present();
-        lToast.present();
-        cToast.present();
-      }
-    );
   }
 }
