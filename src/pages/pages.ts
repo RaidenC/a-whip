@@ -3,6 +3,7 @@ export * from './home/home';
 export * from './diary/diary';
 export * from './add-food/add-food';
 export * from './add-food/search-food';
+export * from './food-detail/food-detail';
 export * from './add-measurement/add-measurement';
 export * from './nutrition/nutrition';
 export * from './nutrients/nutrients';

@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { NdbService } from '../../providers/providers';
+
+import { FoodDetailPage } from '../pages';
 
 @Component({
   selector: 'search-food',
@@ -12,6 +14,8 @@ export class SearchFood {
 
   constructor(
     public ndbService: NdbService,
+    private _navCtrl: NavController,
+    private _navParamas: NavParams,
     private _toastCtrl: ToastController
   ) {
     this.searchResult = [];
@@ -43,5 +47,9 @@ export class SearchFood {
       e => console.log(e),
       () => console.log("complete")
       );
+  }
+
+  addFood(id: number){
+    this._navCtrl.push(FoodDetailPage);
   }
 }
