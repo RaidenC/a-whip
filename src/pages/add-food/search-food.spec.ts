@@ -11,7 +11,6 @@ describe('SearchFood', () => {
       let q: string = 'egg';
       let toastCtl: ToastController
       mockNdbService = jasmine.createSpyObj('mockNdbService', ['searchFood', 'getNutrientSummary', 'emptyFoodSummary'])
-      cmp = new SearchFood(mockNdbService, toastCtl)
     });
 
     it('should update searchResult', () => {
