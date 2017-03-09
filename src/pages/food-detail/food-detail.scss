@@ -1,3 +1,30 @@
 page-food-detail {
 
 }
+
+.serving-number-input {
+    > ion-col {
+        padding: 0px;
+        > button > .item-inner{
+            height: 46px;
+        }
+    }
+} 
+
+.food-summary{
+    padding-left: 16px;
+    > ion-col{
+        padding:0px;
+        > button {
+            padding: 0px;
+        }
+    }
+}
+
+.nutrient-item > ion-col {
+    padding: 0px;
+}
+
+.nutrient-value {
+    padding-left: 0px;
+}
