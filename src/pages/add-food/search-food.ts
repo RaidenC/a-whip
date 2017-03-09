@@ -11,12 +11,13 @@ import { FoodDetailPage } from '../pages';
 export class SearchFood {
   @Input() query: string;
   searchResult: Array<any>
+  foodDetail: any;
 
   constructor(
     public ndbService: NdbService,
-    private _navCtrl: NavController,
-    private _navParamas: NavParams,
-    private _toastCtrl: ToastController
+    public navCtrl: NavController,
+    public navParamas: NavParams,
+    public toastCtrl: ToastController
   ) {
     this.searchResult = [];
   }
@@ -34,9 +35,12 @@ export class SearchFood {
             title = keywords.find(word => { return word.toUpperCase().includes(q.toUpperCase()) });
             keywords.splice(keywords.indexOf(title), 1);
             this.searchResult.push({ "title": title, "keywords": keywords, "ndbno": food.ndbno });
+            // this.searchResult.sort((a,b)=>{
+            //   return parseFloat(a.ndbno) - parseFloat(b.ndbno);
+            // });
           });
         } else {
-          let toast = this._toastCtrl.create({
+          let toast = this.toastCtrl.create({
             message: 'No record found',
             position: 'bottom',
             duration: 1000
@@ -49,7 +53,18 @@ export class SearchFood {
       );
   }
 
-  addFood(id: number){
-    this._navCtrl.push(FoodDetailPage);
+  addFood(title: string, ndbno: number) {
+    this.ndbService.getFoodReport(ndbno)
+      .subscribe(
+      value => {
+        
+        this.foodDetail = value.report.food;
+      },
+      e => console.log(e),
+      () => {
+       this.navCtrl.push(FoodDetailPage, {"title": title,"food": this.foodDetail});
+      }
+      );
+
   }
 }

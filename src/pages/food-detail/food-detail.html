@@ -1,17 +1,43 @@
 <ion-header>
 
   <ion-navbar>
-      <ion-title>Food Detail</ion-title>
-      <ion-buttons end>
-        <button ion-button icon-only>
+    <ion-title>Food Detail</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
           <ion-icon name="checkmark"></ion-icon>
         </button>
-      </ion-buttons>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>{{title}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Serving Size</ion-label>
+      <ion-select *ngFor="let measure of foodDetail.nutrients[0].measures">
+          <ion-option value="measure.eqv">1.0 {{measure.label}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-row class="serving-number-input">
+      <ion-col width-80><button ion-item>Number of Servings</button></ion-col>
+      <ion-col width-20><button ion-item><ion-input type="number" placeholder="1.0"></ion-input></button></ion-col>
+    </ion-row>
+    <ion-row class="food-summary">
+      <ion-col><button ion-item><p>Protein(g) </p><h2>{{foodDetail.nutrients[1].value}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Fat(g) </p><h2>{{foodDetail.nutrients[3].value}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Carbs(g) </p><h2>{{foodDetail.nutrients[4].value}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Calories(g) </p><h2>{{foodDetail.nutrients[1].value}}</h2></button></ion-col>
+    </ion-row>
+    <div *ngFor="let nutrient of foodDetail.nutrients">
+      <ion-row class="nutrient-item">
+        <ion-col width-80><button ion-item class="nutrient-name">{{nutrient.name}}</button></ion-col>
+        <ion-col width-20><button ion-item class="nutrient-value">{{nutrient.value}}g</button></ion-col>
+      </ion-row>
+    </div>
+  </ion-list>
 </ion-content>
