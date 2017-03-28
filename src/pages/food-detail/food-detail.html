@@ -19,24 +19,35 @@
     </ion-item>
     <ion-item class="serving-size">
       <ion-label>Serving Size</ion-label>
-      <ion-select *ngFor="let measure of foodDetail.nutrients[0].measures">
-          <ion-option value="measure.eqv">1.0 {{measure.label}}</ion-option>
+      <ion-select [(ngModel)]="servingSize">
+        <ion-option value="100" checked>100 g</ion-option>
+        <div *ngFor="let measure of foodDetail.nutrients[0].measures">
+          <div *ngIf="measure.label == 'g'">
+            <ion-option value="{{measure.eqv}}">{{measure.eqv}} {{measure.label}}</ion-option>
+          </div>
+          <div *ngIf="measure.label !== 'g'">
+            <ion-option value="{{measure.eqv}}">1.0 {{measure.label}}</ion-option>
+          </div>
+        </div>
       </ion-select>
     </ion-item>
     <ion-row class="serving-number-input">
       <ion-col width-80><button ion-item>Number of Servings</button></ion-col>
-      <ion-col width-20><button ion-item><ion-input type="number" placeholder="1.0"></ion-input></button></ion-col>
+      <ion-col width-20><button ion-item>
+        <ion-input type="number" placeholder="1.0" [(ngModel)]="servings"></ion-input>
+      </button></ion-col>
     </ion-row>
     <ion-row class="food-summary">
-      <ion-col><button ion-item><p>Protein(g) </p><h2>{{foodDetail.nutrients[1].value}}</h2></button></ion-col>
-      <ion-col><button ion-item><p>Fat(g) </p><h2>{{foodDetail.nutrients[3].value}}</h2></button></ion-col>
-      <ion-col><button ion-item><p>Carbs(g) </p><h2>{{foodDetail.nutrients[4].value}}</h2></button></ion-col>
-      <ion-col><button ion-item><p>Calories(g) </p><h2>{{foodDetail.nutrients[1].value}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Protein(g) </p><h2>{{foodSummary.nutrients[1].gm*servings*servingSize/100 | number: '1.1-1'}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Fat(g) </p><h2>{{foodSummary.nutrients[2].gm*servings*servingSize/100 | number: '1.1-1'}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Carbs(g) </p><h2>{{foodSummary.nutrients[3].gm*servings*servingSize/100 | number: '1.1-1'}}</h2></button></ion-col>
+      <ion-col><button ion-item><p>Calories(kcal) </p><h2>{{foodSummary.nutrients[0].gm*servings*servingSize/100 | number: '1.1-1'}}</h2></button></ion-col>
     </ion-row>
     <div *ngFor="let nutrient of foodDetail.nutrients">
       <ion-row class="nutrient-item">
-        <ion-col width-80><button ion-item class="nutrient-name">{{nutrient.name}}</button></ion-col>
-        <ion-col width-20><button ion-item class="nutrient-value">{{nutrient.value}} g</button></ion-col>
+        <ion-col width-70><button ion-item class="nutrient-name">{{nutrient.name}}</button></ion-col>
+        <ion-col width-20><button ion-item class="nutrient-value">{{nutrient.value*servings*servingSize/100 | number: '1.1-1'}}</button></ion-col>
+        <ion-col width-10><button ion-item class="nutrient-unit">{{nutrient.unit}}</button></ion-col>
       </ion-row>
     </div>
   </ion-list>
