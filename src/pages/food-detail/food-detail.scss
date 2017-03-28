@@ -2,7 +2,16 @@ page-food-detail {
 
 }
 
+.food-title {
+    padding-right: 10px;
+}
+
+.serving-size {
+    padding-right: 10px;
+}
+
 .serving-number-input {
+    padding-right: 10px;
     > ion-col {
         padding: 0px;
         > button > .item-inner{
@@ -13,10 +22,14 @@ page-food-detail {
 
 .food-summary{
     padding-left: 16px;
+    padding-right: 10px;
     > ion-col{
         padding:0px;
         > button {
             padding: 0px;
+            > .item-inner > .input-wrapper > .label {
+                text-align: center;
+            }
         }
     }
 }
@@ -27,6 +40,7 @@ page-food-detail {
 
 .nutrient-value {
     padding-left: 0px;
+    padding-right: 10px;
     > .item-inner > .input-wrapper > .label {
         text-align: right;
     }
