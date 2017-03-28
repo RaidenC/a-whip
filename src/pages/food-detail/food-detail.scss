@@ -1,6 +1,6 @@
 page-food-detail {
-
 }
+
 
 .food-title {
     padding-right: 10px;
@@ -40,8 +40,24 @@ page-food-detail {
 
 .nutrient-value {
     padding-left: 0px;
-    padding-right: 10px;
-    > .item-inner > .input-wrapper > .label {
-        text-align: right;
+    
+    > .item-inner {
+        padding-right: 0px !important;
+        > .input-wrapper > .label {
+             text-align: right;
+        }
     }
+}
+
+.nutrient-unit {
+    padding-left: 0px;
+    padding-right: 10px;
+    > .item-inner {
+        padding-right: 0px !important;
+        > .input-wrapper > .label {
+            text-align: center;
+            font-size: smaller;
+        }
+    }
+    
 }

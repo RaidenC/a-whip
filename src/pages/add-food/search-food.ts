@@ -12,6 +12,7 @@ export class SearchFood {
   @Input() query: string;
   searchResult: Array<any>
   foodDetail: any;
+  foodSummary: any;
 
   constructor(
     public ndbService: NdbService,
@@ -57,14 +58,27 @@ export class SearchFood {
     this.ndbService.getFoodReport(ndbno)
       .subscribe(
       value => {
-        
         this.foodDetail = value.report.food;
       },
       e => console.log(e),
       () => {
-       this.navCtrl.push(FoodDetailPage, {"title": title,"food": this.foodDetail});
+        this.getFoodSummary(title, ndbno);
       }
       );
 
+
+  }
+
+  getFoodSummary(title: string, ndbno: number) {
+    this.ndbService.getNutrientSummary(ndbno)
+      .subscribe(
+      value => {
+        this.foodSummary = value.report.foods[0];
+      },
+      e => console.log(e),
+      () => {
+        this.navCtrl.push(FoodDetailPage, { "title": title, "food": this.foodDetail, "summary": this.foodSummary });
+      }
+      );
   }
 }

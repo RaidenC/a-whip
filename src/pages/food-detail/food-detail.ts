@@ -9,6 +9,9 @@ import { NdbService } from '../../providers/providers';
 export class FoodDetailPage {
   title: string
   foodDetail: any;
+  foodSummary: any;
+  servings: number;
+  servingSize: number;
 
   constructor(
     public navCtrl: NavController,
@@ -17,6 +20,9 @@ export class FoodDetailPage {
   ) {
     this.title = this.navParams.get("title");
     this.foodDetail = this.navParams.get("food");
+    this.foodSummary = this.navParams.get("summary");
+    this.servings = 1.0;
+    this.servingSize = 100;
   }
 
 }
