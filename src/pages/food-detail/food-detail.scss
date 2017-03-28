@@ -27,4 +27,7 @@ page-food-detail {
 
 .nutrient-value {
     padding-left: 0px;
+    > .item-inner > .input-wrapper > .label {
+        text-align: right;
+    }
 }
