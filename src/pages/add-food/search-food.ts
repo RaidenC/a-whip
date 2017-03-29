@@ -9,7 +9,8 @@ import { FoodDetailPage } from '../pages';
   templateUrl: 'search-food.html',
 })
 export class SearchFood {
-  @Input() query: string;
+  @Input() query: string; 
+  @Input() meal: any;
   searchResult: Array<any>
   foodDetail: any;
   foodSummary: any;
@@ -77,7 +78,7 @@ export class SearchFood {
       },
       e => console.log(e),
       () => {
-        this.navCtrl.push(FoodDetailPage, { "title": title, "food": this.foodDetail, "summary": this.foodSummary });
+        this.navCtrl.push(FoodDetailPage, { "title": title, "meal": this.meal, "food": this.foodDetail, "summary": this.foodSummary });
       }
       );
   }

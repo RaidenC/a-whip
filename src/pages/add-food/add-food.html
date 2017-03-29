@@ -31,7 +31,7 @@
   <div class="food-list-container" [ngSwitch]="segment">
     <ion-list *ngSwitchCase="'recent'">
       <div *ngIf="recentFood.length !== 0"><ion-item *ngFor="let r of recentFood">{{c}}</ion-item></div>
-      <div *ngIf="recentFood.length == 0"><search-food [query]="query"></search-food></div>
+      <div *ngIf="recentFood.length == 0"><search-food [query]="query" [meal]="meal"></search-food></div>
     </ion-list>
     <ion-list *ngSwitchCase="'custom'">
       <ion-item *ngFor="let c of customFood">{{c}}</ion-item>

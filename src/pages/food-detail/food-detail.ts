@@ -7,7 +7,8 @@ import { NdbService } from '../../providers/providers';
   templateUrl: 'food-detail.html'
 })
 export class FoodDetailPage {
-  title: string
+  title: string;
+  meal: any;
   foodDetail: any;
   foodSummary: any;
   servings: number;
@@ -19,10 +20,15 @@ export class FoodDetailPage {
     public ndbService: NdbService,
   ) {
     this.title = this.navParams.get("title");
+    this.meal = this.navParams.get("meal");
     this.foodDetail = this.navParams.get("food");
     this.foodSummary = this.navParams.get("summary");
     this.servings = 1.0;
     this.servingSize = 100;
+  }
+
+  save() {
+    
   }
 
 }
