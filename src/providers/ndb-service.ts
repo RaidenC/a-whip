@@ -31,7 +31,7 @@ export class NdbService {
       .catch(this._handleError);
   }
 
-  getFoodReport(ndbno: any){
+  getFoodReport(ndbno: any) {
     let baseUrl = "https://api.nal.usda.gov/ndb/reports/?format=json&api_key=MO2tCSDwNo33vvL90mSk8OrRxq6J1OxzsW5QrfMG";
     let type = "b" //as brief (f as full)
     let url = baseUrl + `&ndbno=${ndbno}`;
@@ -40,7 +40,7 @@ export class NdbService {
       .catch(this._handleError);
   }
 
-  private _handleError(error: Response){
+  private _handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
 }
